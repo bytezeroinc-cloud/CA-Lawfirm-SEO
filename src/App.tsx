@@ -7,6 +7,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<VexPage />} />
         <Route path="/vex" element={<VexPage />} />
+        <Route path="/ai-website-development-law-firms-california" element={<VexPage />} />
       </Routes>
     </BrowserRouter>
   )
