@@ -29,9 +29,14 @@ const comparisons = [
     after: 'Automated nurture sequences keep leads warm for 90 days — no manual effort',
   },
   {
-    category: 'Campaign Strategy',
-    before: 'Same strategy across all cities and practice areas',
-    after: 'AI segments campaigns by city, practice area, and case value — unique strategy per market',
+    category: 'Search Channels',
+    before: 'Google Ads only — Bing and Microsoft Ads ignored',
+    after: 'Google + Bing managed together — Bing delivers 20–35% lower CPC for legal keywords',
+  },
+  {
+    category: 'Measurement',
+    before: 'Clicks and impressions in a PDF — no connection to actual cases',
+    after: 'GA4 + call tracking ties every keyword → click → call → signed retainer',
   },
 ]
 
