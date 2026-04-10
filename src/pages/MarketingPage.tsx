@@ -3,18 +3,16 @@ import LogoTicker from '../components/LogoTicker'
 import MarketingChannels from '../components/MarketingChannels'
 import AIvsTraditionalMarketing from '../components/AIvsTraditionalMarketing'
 import MarketingToolStack from '../components/MarketingToolStack'
-import GeoSection from '../components/GeoSection'
+import MarketingCities from '../components/MarketingCities'
 import MarketingProcess from '../components/MarketingProcess'
-import Results from '../components/Results'
+import MarketingResults from '../components/MarketingResults'
 import MarketingPricing from '../components/MarketingPricing'
 import Footer from '../components/Footer'
 import VideoSection from '../components/VideoSection'
 
-// Atmospheric bento video
 const BENTO_VIDEO =
   'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260302_085640_276ea93b-d7da-4418-a09b-2aa5b490e838.mp4'
 
-// Content sections — Mux HLS stream
 const SECTIONS_VIDEO =
   'https://stream.mux.com/NcU3HlHeF7CUL86azTTzpy3Tlb00d6iF3BmCdFslMJYM.m3u8'
 
@@ -28,30 +26,32 @@ export default function MarketingPage() {
       {/* 2. Logo ticker */}
       <LogoTicker light />
 
-      {/* 3. Marketing Channels — 6 expanded service cards */}
+      {/* 3. 6 expanded service/channel cards */}
       <VideoSection videoUrl={BENTO_VIDEO} overlay={0.52}>
         <MarketingChannels />
       </VideoSection>
 
-      {/* 4. All content sections */}
+      {/* 4. All content sections — all marketing-specific */}
       <VideoSection videoUrl={SECTIONS_VIDEO} overlay={0.62} zoom>
-        {/* Marketing-specific: AI vs Traditional agencies */}
+
+        {/* AI vs traditional marketing agency comparison */}
         <AIvsTraditionalMarketing />
 
-        {/* Marketing-specific: actual AI tool stack */}
+        {/* Transparent AI tool stack */}
         <MarketingToolStack />
 
-        {/* Shared: California geo coverage */}
-        <GeoSection />
+        {/* CA city market intelligence + budget allocation — with city page links */}
+        <MarketingCities />
 
-        {/* Marketing-specific: audit → launch → optimize → scale */}
+        {/* Audit → Launch → Optimize → Scale process */}
         <MarketingProcess />
 
-        {/* Shared: proven results numbers */}
-        <Results />
+        {/* Paid media results: ROAS, CPL, lead volume, revenue */}
+        <MarketingResults />
 
-        {/* Marketing-specific: pricing + FAQ */}
+        {/* Pricing + FAQ */}
         <MarketingPricing />
+
       </VideoSection>
 
       {/* 5. Footer */}
