@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import VexPage from './pages/VexPage'
 import SeoPage from './pages/SeoPage'
+import MarketingPage from './pages/MarketingPage'
 
 export default function App() {
   return (
@@ -10,6 +11,7 @@ export default function App() {
         <Route path="/vex" element={<VexPage />} />
         <Route path="/ai-website-development-law-firms-california" element={<VexPage />} />
         <Route path="/ai-seo-law-firms-california" element={<SeoPage />} />
+        <Route path="/ai-marketing-law-firms-california" element={<MarketingPage />} />
       </Routes>
     </BrowserRouter>
   )

@@ -1,21 +1,20 @@
 import { useState, useEffect, useRef } from 'react'
 import { Menu, X, Phone } from 'lucide-react'
 
-const VIDEO_URL = '/ai-seo-hero.mp4'
+const VIDEO_URL =
+  'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260403_050628_c4e32401-fab4-4a27-b7a8-6e9291cd5959.mp4'
 
 const NAV_LINKS = ['AI SEO', 'AI Website', 'AI Marketing']
 
-// ── Stats data ───────────────────────────────────────────
 const STATS = [
-  { value: 300, suffix: '%', unit: '',     label: 'Average Traffic Growth',    color: '#FF8C42' },
-  { value: 5,   suffix: '+', unit: '',     label: 'AI Platforms Cited On',     color: '#60A5FA' },
-  { value: 199, suffix: '+', unit: '',     label: 'California Cities Covered', color: '#34D399' },
-  { value: 95,  suffix: '+', unit: '',     label: 'Target PageSpeed Score',    color: '#C084FC' },
+  { value: 300, suffix: '%', unit: '',  label: 'Average ROAS Growth',       color: '#C084FC' },
+  { value: 6,   suffix: '+', unit: '',  label: 'AI Marketing Tools Used',   color: '#FF8C42' },
+  { value: 199, suffix: '+', unit: '',  label: 'California Cities Covered', color: '#34D399' },
+  { value: 95,  suffix: '%', unit: '',  label: 'Client Retention Rate',     color: '#60A5FA' },
 ]
 
-// ── Character animation builder ─────────────────────────
-const LINE_1 = 'AI SEO for California'
-const LINE_2 = 'Law Firms'
+const LINE_1 = 'AI Marketing for'
+const LINE_2 = 'California Law Firms'
 
 let _idx = 0
 const buildLine = (text: string) =>
@@ -23,15 +22,13 @@ const buildLine = (text: string) =>
 
 _idx = 0
 const CHARS_1 = buildLine(LINE_1)
-_idx++ // skip the newline slot
+_idx++
 const CHARS_2 = buildLine(LINE_2)
 
-// ── Count-up easing ──────────────────────────────────────
-const DURATION = 1600 // ms
-const TICK = 25       // ms
+const DURATION = 1600
+const TICK = 25
 
-// ── Component ────────────────────────────────────────────
-export default function SeoHero() {
+export default function MarketingHero() {
   const [mounted, setMounted] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [counts, setCounts] = useState(STATS.map(() => 0))
@@ -81,7 +78,7 @@ export default function SeoHero() {
         minHeight: '100svh',
       }}
     >
-      {/* ── Background Video ── */}
+      {/* Background Video */}
       <video
         src={VIDEO_URL}
         autoPlay
@@ -92,47 +89,35 @@ export default function SeoHero() {
         style={{ zIndex: 0 }}
       />
 
-      {/* ── Dark overlay ── */}
+      {/* Dark overlay with purple tint */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           zIndex: 1,
           background:
-            'linear-gradient(to bottom, rgba(0,0,0,0.30) 0%, rgba(0,0,0,0.18) 40%, rgba(0,0,0,0.60) 100%)',
+            'linear-gradient(to bottom, rgba(0,0,0,0.28) 0%, rgba(12,0,20,0.18) 40%, rgba(0,0,0,0.58) 100%)',
         }}
       />
 
-      {/* ── Blue-tinted tint to differentiate from website page ── */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          zIndex: 2,
-          background: 'radial-gradient(ellipse at 70% 30%, rgba(96,165,250,0.08) 0%, transparent 65%)',
-        }}
-      />
-
-      {/* ── Navbar ── */}
+      {/* Navbar */}
       <header className="relative z-50 px-6 sm:px-10 md:px-16 pt-3 sm:pt-4">
         <nav className="max-w-6xl mx-auto liquid-glass rounded-xl px-4 sm:px-6 py-3 flex items-center justify-between">
-          {/* Logo */}
           <a href="/" className="flex items-center shrink-0">
-            <img
-              src="/logo.svg"
-              alt="VEX Logo"
-              className="h-9 w-auto object-contain"
-            />
+            <img src="/logo.svg" alt="VEX Logo" className="h-9 w-auto object-contain" />
           </a>
 
-          {/* Desktop links */}
           <div className="hidden lg:flex items-center gap-6 lg:gap-8">
             {NAV_LINKS.map((link) => (
               <a
                 key={link}
-                href={link === 'AI SEO' ? '/ai-seo-law-firms-california' : link === 'AI Website' ? '/' : '#'}
+                href={
+                  link === 'AI SEO' ? '/ai-seo-law-firms-california'
+                  : link === 'AI Website' ? '/'
+                  : '/ai-marketing-law-firms-california'
+                }
                 className="text-sm transition-colors duration-200"
                 style={{
-                  color: link === 'AI SEO' ? '#60A5FA' : 'rgba(255,255,255,0.65)',
-                  textShadow: link === 'AI SEO' ? '0 0 14px rgba(96,165,250,0.55)' : 'none',
+                  color: link === 'AI Marketing' ? 'rgba(192,132,252,0.9)' : 'rgba(255,255,255,0.65)',
                 }}
               >
                 {link}
@@ -140,21 +125,19 @@ export default function SeoHero() {
             ))}
           </div>
 
-          {/* Desktop CTA */}
           <a
             href="tel:+18336675253"
             className="hidden lg:flex items-center gap-2 rounded-lg px-5 py-2 text-sm font-semibold transition-all duration-200 hover:scale-[1.03]"
             style={{
-              background: 'linear-gradient(135deg, #3B82F6, #1D4ED8)',
+              background: 'linear-gradient(135deg, #C084FC, #9333EA)',
               color: '#fff',
-              boxShadow: '0 0 18px rgba(59,130,246,0.45)',
+              boxShadow: '0 0 18px rgba(192,132,252,0.4)',
             }}
           >
             <Phone size={14} strokeWidth={2.5} />
             Call Us
           </a>
 
-          {/* Mobile hamburger */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="lg:hidden w-9 h-9 flex items-center justify-center relative"
@@ -169,7 +152,6 @@ export default function SeoHero() {
           </button>
         </nav>
 
-        {/* Mobile dropdown */}
         <div
           className="lg:hidden mx-1 mt-1 liquid-glass rounded-xl overflow-hidden"
           style={{
@@ -182,9 +164,12 @@ export default function SeoHero() {
             {NAV_LINKS.map((link) => (
               <a
                 key={link}
-                href={link === 'AI SEO' ? '/ai-seo-law-firms-california' : link === 'AI Website' ? '/' : '#'}
-                className="py-2.5 text-sm border-b border-white/[0.06] last:border-0 transition-colors"
-                style={{ color: link === 'AI SEO' ? '#60A5FA' : 'rgba(255,255,255,0.70)' }}
+                href={
+                  link === 'AI SEO' ? '/ai-seo-law-firms-california'
+                  : link === 'AI Website' ? '/'
+                  : '/ai-marketing-law-firms-california'
+                }
+                className="py-2.5 text-sm text-white/70 hover:text-white border-b border-white/[0.06] last:border-0 transition-colors"
                 onClick={() => setMenuOpen(false)}
               >
                 {link}
@@ -193,7 +178,7 @@ export default function SeoHero() {
             <a
               href="tel:+18336675253"
               className="mt-3 w-full flex items-center justify-center gap-2 rounded-lg py-2.5 text-sm font-semibold"
-              style={{ background: 'linear-gradient(135deg, #3B82F6, #1D4ED8)', color: '#fff', boxShadow: '0 0 14px rgba(59,130,246,0.40)' }}
+              style={{ background: 'linear-gradient(135deg, #C084FC, #9333EA)', color: '#fff', boxShadow: '0 0 14px rgba(192,132,252,0.35)' }}
               onClick={() => setMenuOpen(false)}
             >
               <Phone size={14} strokeWidth={2.5} />
@@ -203,28 +188,25 @@ export default function SeoHero() {
         </div>
       </header>
 
-      {/* ── Hero content ── */}
+      {/* Hero Content */}
       <main className="relative z-10 flex-1 flex items-end justify-center px-5 sm:px-10 md:px-16 pb-8 sm:pb-12 md:pb-16 pt-16 sm:pt-24 md:pt-32">
         <div className="w-full max-w-6xl mx-auto">
 
           {/* Badge */}
-          <div style={fadeStyle(100, 600)}>
+          <div className="mb-4 sm:mb-5" style={fadeStyle(400)}>
             <span
-              className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-5"
+              className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-[10px] font-semibold uppercase tracking-widest"
               style={{
-                background: 'rgba(59,130,246,0.12)',
-                border: '1px solid rgba(59,130,246,0.30)',
-                backdropFilter: 'blur(12px)',
+                background: 'rgba(192,132,252,0.10)',
+                border: '1px solid rgba(192,132,252,0.28)',
+                color: 'rgba(192,132,252,0.85)',
               }}
             >
-              <span className="w-1.5 h-1.5 rounded-full" style={{ background: '#60A5FA', boxShadow: '0 0 6px #60A5FA' }} />
-              <span className="text-[11px] font-medium uppercase tracking-widest" style={{ color: '#60A5FA' }}>
-                Generative Engine Optimization + SEO
-              </span>
+              <span className="w-1.5 h-1.5 rounded-full" style={{ background: '#C084FC', boxShadow: '0 0 8px #C084FC' }} />
+              AI-POWERED LEGAL MARKETING
             </span>
           </div>
 
-          {/* Heading */}
           <h1
             className="mb-4 sm:mb-5 md:mb-7 font-thin"
             style={{
@@ -236,40 +218,27 @@ export default function SeoHero() {
           >
             <div>
               {CHARS_1.map(({ char, delay }, i) => (
-                <span key={i} style={charStyle(delay)}>
-                  {char === ' ' ? '\u00A0' : char}
-                </span>
+                <span key={i} style={charStyle(delay)}>{char === ' ' ? '\u00A0' : char}</span>
               ))}
             </div>
             <div>
               {CHARS_2.map(({ char, delay }, i) => (
-                <span key={i} style={charStyle(delay)}>
-                  {char === ' ' ? '\u00A0' : char}
-                </span>
+                <span key={i} style={charStyle(delay)}>{char === ' ' ? '\u00A0' : char}</span>
               ))}
             </div>
           </h1>
 
-          {/* Subheading */}
           <p
             className="text-gray-300 mb-6 sm:mb-8 md:mb-10 max-w-xs sm:max-w-md md:max-w-xl"
-            style={{
-              fontSize: 'clamp(13px, 1.8vw, 18px)',
-              lineHeight: 1.6,
-              ...fadeStyle(800),
-            }}
+            style={{ fontSize: 'clamp(13px, 1.8vw, 18px)', lineHeight: 1.6, ...fadeStyle(800) }}
           >
-            Dominate Google search and get cited by ChatGPT, Perplexity & every AI engine — with SEO built specifically for California law firms.
+            AI-powered campaigns — Google Ads, content, email, and lead generation — built specifically for California law firms. Measurable ROI, delivered.
           </p>
 
-          {/* CTA buttons */}
           <div className="flex flex-col sm:flex-row gap-3" style={fadeStyle(1200)}>
-            <a
-              href="#contact"
-              className="w-full sm:w-auto rounded-lg px-5 sm:px-6 py-2.5 text-sm font-semibold text-white hover:opacity-90 active:scale-[0.98] transition-all text-center"
-              style={{ background: 'linear-gradient(135deg, #3B82F6, #1D4ED8)', boxShadow: '0 0 20px rgba(59,130,246,0.35)' }}
-            >
-              Get My Free SEO Audit
+            <a href="#contact" className="w-full sm:w-auto rounded-lg px-5 sm:px-6 py-2.5 text-sm font-semibold hover:scale-[1.02] active:scale-[0.98] transition-all text-center"
+              style={{ background: 'linear-gradient(135deg, #C084FC, #9333EA)', color: '#fff', boxShadow: '0 0 20px rgba(192,132,252,0.35)' }}>
+              Get Free Marketing Audit
             </a>
             <a href="#contact" className="w-full sm:w-auto liquid-glass border border-white/20 rounded-lg px-5 sm:px-6 py-2.5 text-sm font-medium text-white hover:bg-white/10 active:scale-[0.98] transition-all text-center">
               Book Strategy Call
@@ -279,19 +248,16 @@ export default function SeoHero() {
         </div>
       </main>
 
-      {/* ── Stats bar ── */}
-      <div
-        className="relative z-20 px-6 sm:px-10 md:px-16 pb-8 sm:pb-10"
-        style={fadeStyle(1600, 800)}
-      >
+      {/* Stats Bar */}
+      <div className="relative z-20 px-6 sm:px-10 md:px-16 pb-8 sm:pb-10" style={fadeStyle(1600, 800)}>
         <div
           className="max-w-6xl mx-auto rounded-2xl overflow-hidden"
           style={{
-            background: 'rgba(20,30,50,0.55)',
+            background: 'rgba(230,230,238,0.11)',
             backdropFilter: 'blur(32px)',
             WebkitBackdropFilter: 'blur(32px)',
-            border: '1px solid rgba(96,165,250,0.18)',
-            boxShadow: 'inset 0 1px 0 rgba(96,165,250,0.12), 0 4px 24px rgba(0,0,0,0.20)',
+            border: '1px solid rgba(255,255,255,0.16)',
+            boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.14), 0 4px 24px rgba(0,0,0,0.18)',
           }}
         >
           <div className="grid grid-cols-2 lg:grid-cols-4">
@@ -314,18 +280,14 @@ export default function SeoHero() {
                     fontFamily: "'Brockmann', sans-serif",
                   }}
                 >
-                  {counts[i]}
-                  {stat.suffix}
+                  {counts[i]}{stat.suffix}
                   {stat.unit && (
                     <span className="ml-1" style={{ fontSize: 'clamp(13px, 1.2vw, 16px)', opacity: 0.75 }}>
                       {stat.unit}
                     </span>
                   )}
                 </div>
-                <p
-                  className="text-white/40 leading-tight"
-                  style={{ fontSize: 'clamp(10px, 0.9vw, 12px)', marginTop: '4px' }}
-                >
+                <p className="text-white/40 leading-tight" style={{ fontSize: 'clamp(10px, 0.9vw, 12px)', marginTop: '4px' }}>
                   {stat.label}
                 </p>
               </div>
