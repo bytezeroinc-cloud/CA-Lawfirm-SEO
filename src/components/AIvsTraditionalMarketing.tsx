@@ -1,6 +1,6 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { X, Check } from 'lucide-react'
+import { X, Check, ArrowRight } from 'lucide-react'
 
 const comparisons = [
   {
@@ -72,7 +72,7 @@ export default function AIvsTraditionalMarketing() {
             <span style={{ color: '#C084FC', filter: 'drop-shadow(0 0 20px rgba(192,132,252,0.5))' }}>Can't Keep Up</span>
           </h2>
           <p className="mt-3 text-white/40 text-sm max-w-md mx-auto">
-            The gap between agencies still doing things manually and those running AI is widening every month.
+            The gap between a traditional legal marketing agency and one running AI is widening every month.
           </p>
         </motion.div>
 
@@ -83,6 +83,7 @@ export default function AIvsTraditionalMarketing() {
             initial={{ opacity: 0, x: -30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
+            whileHover={{ y: -8, transition: { duration: 0.25, ease: 'easeOut' } }}
             className="relative"
           >
             <div className="absolute pointer-events-none" style={{
@@ -96,7 +97,19 @@ export default function AIvsTraditionalMarketing() {
               background: 'linear-gradient(145deg, rgba(239,68,68,0.10) 0%, rgba(15,8,8,0.92) 100%)',
               border: '1px solid rgba(239,68,68,0.30)',
               boxShadow: '0 0 60px rgba(239,68,68,0.12), inset 0 1px 0 rgba(239,68,68,0.12)',
-            }}>
+              transition: 'box-shadow 0.3s ease, border-color 0.3s ease',
+            }}
+            onMouseEnter={e => {
+              const el = e.currentTarget as HTMLDivElement
+              el.style.boxShadow = '0 0 80px rgba(239,68,68,0.28), 0 16px 48px rgba(0,0,0,0.5), inset 0 1px 0 rgba(239,68,68,0.22)'
+              el.style.borderColor = 'rgba(239,68,68,0.55)'
+            }}
+            onMouseLeave={e => {
+              const el = e.currentTarget as HTMLDivElement
+              el.style.boxShadow = '0 0 60px rgba(239,68,68,0.12), inset 0 1px 0 rgba(239,68,68,0.12)'
+              el.style.borderColor = 'rgba(239,68,68,0.30)'
+            }}
+            >
               <div className="px-6 py-4 flex items-center gap-3" style={{ borderBottom: '1px solid rgba(239,68,68,0.12)' }}>
                 <div className="w-7 h-7 rounded-full flex items-center justify-center shrink-0"
                   style={{ background: 'rgba(239,68,68,0.15)', border: '1px solid rgba(239,68,68,0.35)' }}>
@@ -146,6 +159,7 @@ export default function AIvsTraditionalMarketing() {
             initial={{ opacity: 0, x: 30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
+            whileHover={{ y: -8, transition: { duration: 0.25, ease: 'easeOut' } }}
             className="relative"
           >
             <div className="absolute pointer-events-none" style={{
@@ -159,7 +173,19 @@ export default function AIvsTraditionalMarketing() {
               background: 'linear-gradient(145deg, rgba(192,132,252,0.10) 0%, rgba(10,5,18,0.92) 100%)',
               border: '1px solid rgba(192,132,252,0.35)',
               boxShadow: '0 0 60px rgba(192,132,252,0.15), inset 0 1px 0 rgba(192,132,252,0.15)',
-            }}>
+              transition: 'box-shadow 0.3s ease, border-color 0.3s ease',
+            }}
+            onMouseEnter={e => {
+              const el = e.currentTarget as HTMLDivElement
+              el.style.boxShadow = '0 0 90px rgba(192,132,252,0.32), 0 16px 48px rgba(0,0,0,0.5), inset 0 1px 0 rgba(192,132,252,0.25)'
+              el.style.borderColor = 'rgba(192,132,252,0.65)'
+            }}
+            onMouseLeave={e => {
+              const el = e.currentTarget as HTMLDivElement
+              el.style.boxShadow = '0 0 60px rgba(192,132,252,0.15), inset 0 1px 0 rgba(192,132,252,0.15)'
+              el.style.borderColor = 'rgba(192,132,252,0.35)'
+            }}
+            >
               <div className="px-6 py-4 flex items-center gap-3" style={{ borderBottom: '1px solid rgba(192,132,252,0.14)' }}>
                 <div className="w-7 h-7 rounded-full flex items-center justify-center shrink-0"
                   style={{ background: 'rgba(192,132,252,0.18)', border: '1px solid rgba(192,132,252,0.45)', boxShadow: '0 0 10px rgba(192,132,252,0.2)' }}>
@@ -196,6 +222,31 @@ export default function AIvsTraditionalMarketing() {
           </motion.div>
 
         </div>
+
+        {/* CTA */}
+        <motion.div
+          className="text-center mt-14"
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.5 }}
+        >
+          <p className="text-white/35 text-[13px] mb-5">
+            Ready to leave traditional marketing behind?
+          </p>
+          <a
+            href="#contact"
+            className="inline-flex items-center gap-2.5 rounded-xl px-7 py-3.5 text-[13px] font-semibold transition-all hover:scale-[1.03] active:scale-[0.98]"
+            style={{
+              background: 'linear-gradient(135deg, #C084FC, #9333EA)',
+              color: '#fff',
+              boxShadow: '0 0 28px rgba(192,132,252,0.35)',
+            }}
+          >
+            Book a Free Strategy Call
+            <ArrowRight size={15} />
+          </a>
+        </motion.div>
+
       </div>
     </section>
   )

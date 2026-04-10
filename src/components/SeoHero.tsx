@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
 import { Menu, X, Phone } from 'lucide-react'
 
-const VIDEO_URL = '/ai-seo-hero.mp4'
+const VIDEO_URL =
+  'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260406_094145_4a271a6c-3869-4f1c-8aa7-aeb0cb227994.mp4'
 
 const NAV_LINKS = ['AI SEO', 'AI Website', 'AI Marketing']
 
@@ -207,22 +208,6 @@ export default function SeoHero() {
       <main className="relative z-10 flex-1 flex items-end justify-center px-5 sm:px-10 md:px-16 pb-8 sm:pb-12 md:pb-16 pt-16 sm:pt-24 md:pt-32">
         <div className="w-full max-w-6xl mx-auto">
 
-          {/* Badge */}
-          <div style={fadeStyle(100, 600)}>
-            <span
-              className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-5"
-              style={{
-                background: 'rgba(59,130,246,0.12)',
-                border: '1px solid rgba(59,130,246,0.30)',
-                backdropFilter: 'blur(12px)',
-              }}
-            >
-              <span className="w-1.5 h-1.5 rounded-full" style={{ background: '#60A5FA', boxShadow: '0 0 6px #60A5FA' }} />
-              <span className="text-[11px] font-medium uppercase tracking-widest" style={{ color: '#60A5FA' }}>
-                Generative Engine Optimization + SEO
-              </span>
-            </span>
-          </div>
 
           {/* Heading */}
           <h1

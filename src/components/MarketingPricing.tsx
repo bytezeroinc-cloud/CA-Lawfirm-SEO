@@ -78,8 +78,8 @@ const faqs = [
     a: 'Yes — we manage the full Google Ads account including campaign setup, bid strategy, A/B testing, and negative keyword management. Ad spend is billed directly to your Google account; we charge a management fee on top. We\'re transparent about every dollar.',
   },
   {
-    q: 'What makes AI marketing different from traditional marketing?',
-    a: 'Traditional agencies rely on manual optimization, periodic A/B tests, and gut instinct. Our AI tools analyze performance in real time, auto-adjust bids based on predicted case value, score leads before they hit your inbox, and surface content opportunities competitors haven\'t found yet.',
+    q: 'What makes an AI law firm marketing agency different from traditional agencies?',
+    a: 'Traditional agencies rely on manual optimization, periodic A/B tests, and gut instinct. As an AI-powered marketing agency for lawyers, our tools analyze performance in real time, auto-adjust bids based on predicted case value, score leads before they hit your inbox, and surface content opportunities competitors haven\'t found yet.',
   },
   {
     q: 'Is your marketing compliant with California State Bar rules?',

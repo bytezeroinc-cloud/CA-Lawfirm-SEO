@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-body: 'Inter', sans-serif;
-  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Brockmann', 'Space Grotesk', sans-serif;
+  --font-display: 'Brockmann', 'Space Grotesk', sans-serif;
   --color-accent: #6C63FF;
   --color-accent-light: #8B83FF;
   --color-accent-glow: rgba(108, 99, 255, 0.4);
@@ -27,7 +27,7 @@ html {
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Brockmann', 'Space Grotesk', sans-serif;
   background: #050508;
   color: #e0e0e8;
   overflow-x: hidden;

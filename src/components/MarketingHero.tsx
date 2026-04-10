@@ -2,15 +2,15 @@ import { useState, useEffect, useRef } from 'react'
 import { Menu, X, Phone } from 'lucide-react'
 
 const VIDEO_URL =
-  'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260403_050628_c4e32401-fab4-4a27-b7a8-6e9291cd5959.mp4'
+  'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_171521_25968ba2-b594-4b32-aab7-f6b69398a6fa.mp4'
 
 const NAV_LINKS = ['AI SEO', 'AI Website', 'AI Marketing']
 
 const STATS = [
-  { value: 300, suffix: '%', unit: '',  label: 'Average ROAS Growth',       color: '#C084FC' },
-  { value: 6,   suffix: '+', unit: '',  label: 'AI Marketing Tools Used',   color: '#FF8C42' },
-  { value: 199, suffix: '+', unit: '',  label: 'California Cities Covered', color: '#34D399' },
-  { value: 95,  suffix: '%', unit: '',  label: 'Client Retention Rate',     color: '#60A5FA' },
+  { value: 4.8, suffix: '×', unit: '',  label: 'Average ROAS',        color: '#C084FC', decimals: 1 },
+  { value: 42,  suffix: '%', unit: '-', label: 'Cost Per Lead',        color: '#FF8C42', decimals: 0 },
+  { value: 95,  suffix: '%', unit: '',  label: 'Client Retention Rate',color: '#34D399', decimals: 0 },
+  { value: 199, suffix: '+', unit: '',  label: 'CA Cities Served',     color: '#60A5FA', decimals: 0 },
 ]
 
 const LINE_1 = 'AI Marketing for'
@@ -49,7 +49,7 @@ export default function MarketingHero() {
       if (elapsed < 0) return
       const t = Math.min(elapsed / DURATION, 1)
       const eased = 1 - Math.pow(1 - t, 3)
-      setCounts(STATS.map((s) => Math.round(s.value * eased)))
+      setCounts(STATS.map((s) => parseFloat((s.value * eased).toFixed(s.decimals))))
       if (t >= 1 && frameRef.current) clearInterval(frameRef.current)
     }, TICK)
     return () => { if (frameRef.current) clearInterval(frameRef.current) }
@@ -89,13 +89,13 @@ export default function MarketingHero() {
         style={{ zIndex: 0 }}
       />
 
-      {/* Dark overlay with purple tint */}
+      {/* Subtle dark gradient — just enough to keep text readable */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           zIndex: 1,
           background:
-            'linear-gradient(to bottom, rgba(0,0,0,0.28) 0%, rgba(12,0,20,0.18) 40%, rgba(0,0,0,0.58) 100%)',
+            'linear-gradient(to bottom, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.08) 45%, rgba(0,0,0,0.55) 100%)',
         }}
       />
 
@@ -232,7 +232,7 @@ export default function MarketingHero() {
             className="text-gray-300 mb-6 sm:mb-8 md:mb-10 max-w-xs sm:max-w-md md:max-w-xl"
             style={{ fontSize: 'clamp(13px, 1.8vw, 18px)', lineHeight: 1.6, ...fadeStyle(800) }}
           >
-            AI-powered campaigns — Google Ads, content, email, and lead generation — built specifically for California law firms. Measurable ROI, delivered.
+            A legal marketing agency built on AI — Google Ads, content, email, and lead generation engineered specifically for California law firms. Measurable ROI, delivered.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3" style={fadeStyle(1200)}>
@@ -280,12 +280,7 @@ export default function MarketingHero() {
                     fontFamily: "'Brockmann', sans-serif",
                   }}
                 >
-                  {counts[i]}{stat.suffix}
-                  {stat.unit && (
-                    <span className="ml-1" style={{ fontSize: 'clamp(13px, 1.2vw, 16px)', opacity: 0.75 }}>
-                      {stat.unit}
-                    </span>
-                  )}
+                  {stat.unit}{counts[i]}{stat.suffix}
                 </div>
                 <p className="text-white/40 leading-tight" style={{ fontSize: 'clamp(10px, 0.9vw, 12px)', marginTop: '4px' }}>
                   {stat.label}
