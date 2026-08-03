@@ -1,6 +1,7 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef, useState, useEffect } from 'react'
-import { Send, ArrowRight, ArrowUpRight, Phone, Mail, MapPin } from 'lucide-react'
+import { ArrowUpRight, Phone, Mail, MapPin } from 'lucide-react'
+import LeadForm from './LeadForm'
 
 /* ── Testimonials ─────────────────────────────────────────── */
 const testimonials = [
@@ -61,17 +62,12 @@ const navCols = [
 export default function Footer() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
-  const [formState, setFormState] = useState({ name: '', email: '', firm: '', practice: '', message: '' })
   const [activeTestimonial, setActiveTestimonial] = useState(0)
 
   useEffect(() => {
     const iv = setInterval(() => setActiveTestimonial(i => (i + 1) % testimonials.length), 5000)
     return () => clearInterval(iv)
   }, [])
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormState({ ...formState, [e.target.name]: e.target.value })
-  }
 
   return (
     <footer ref={ref} id="contact" className="relative bg-black overflow-hidden">
@@ -130,55 +126,13 @@ export default function Footer() {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="lg:col-span-3 glass-card rounded-2xl p-8"
           >
-            <form className="relative z-10 space-y-5" onSubmit={(e) => e.preventDefault()}>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="text-[11px] text-white/30 uppercase tracking-wider mb-1.5 block font-medium">Your Name</label>
-                  <input type="text" name="name" value={formState.name} onChange={handleChange}
-                    className="glass-input w-full px-4 py-3 rounded-xl text-[14px]" placeholder="John Smith" />
-                </div>
-                <div>
-                  <label className="text-[11px] text-white/30 uppercase tracking-wider mb-1.5 block font-medium">Email</label>
-                  <input type="email" name="email" value={formState.email} onChange={handleChange}
-                    className="glass-input w-full px-4 py-3 rounded-xl text-[14px]" placeholder="john@lawfirm.com" />
-                </div>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="text-[11px] text-white/30 uppercase tracking-wider mb-1.5 block font-medium">Firm Name</label>
-                  <input type="text" name="firm" value={formState.firm} onChange={handleChange}
-                    className="glass-input w-full px-4 py-3 rounded-xl text-[14px]" placeholder="Smith & Associates" />
-                </div>
-                <div>
-                  <label className="text-[11px] text-white/30 uppercase tracking-wider mb-1.5 block font-medium">Practice Area</label>
-                  <select name="practice" value={formState.practice} onChange={handleChange}
-                    className="glass-input w-full px-4 py-3 rounded-xl text-[14px] appearance-none cursor-pointer">
-                    <option value="" className="bg-[#0a0a0f]">Select area...</option>
-                    <option value="pi"         className="bg-[#0a0a0f]">Personal Injury</option>
-                    <option value="family"     className="bg-[#0a0a0f]">Family Law</option>
-                    <option value="criminal"   className="bg-[#0a0a0f]">Criminal Defense</option>
-                    <option value="immigration" className="bg-[#0a0a0f]">Immigration</option>
-                    <option value="estate"     className="bg-[#0a0a0f]">Estate Planning</option>
-                    <option value="business"   className="bg-[#0a0a0f]">Business Law</option>
-                    <option value="other"      className="bg-[#0a0a0f]">Other</option>
-                  </select>
-                </div>
-              </div>
-              <div>
-                <label className="text-[11px] text-white/30 uppercase tracking-wider mb-1.5 block font-medium">Tell Us About Your Goals</label>
-                <textarea name="message" value={formState.message} onChange={handleChange} rows={4}
-                  className="glass-input w-full px-4 py-3 rounded-xl text-[14px] resize-none"
-                  placeholder="What's your biggest challenge with your current website?" />
-              </div>
-              <button type="submit"
-                className="w-full py-4 rounded-xl text-[14px] font-semibold flex items-center justify-center gap-2 group text-white transition-all duration-300"
-                style={{ background: 'linear-gradient(135deg, rgba(255,140,66,0.22) 0%, rgba(108,99,255,0.18) 100%)', border: '1px solid rgba(255,140,66,0.35)' }}
-              >
-                <Send size={15} />
-                Book Free Strategy Call
-                <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-              </button>
-            </form>
+            <LeadForm
+              source="footer"
+              buttonStyle={{
+                background: 'linear-gradient(135deg, rgba(255,140,66,0.22) 0%, rgba(108,99,255,0.18) 100%)',
+                border: '1px solid rgba(255,140,66,0.35)',
+              }}
+            />
           </motion.div>
 
           {/* Rotating testimonial */}
