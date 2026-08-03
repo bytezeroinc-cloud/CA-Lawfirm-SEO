@@ -24,9 +24,18 @@ export type LeadSource = 'contact-section' | 'footer'
 /** Where leads are POSTed. Unset in dev → mailto fallback path. */
 export const LEAD_ENDPOINT: string | undefined = import.meta.env.VITE_LEAD_ENDPOINT
 
-/** Inbox shown to the user whenever the POST can't be completed. */
-export const LEAD_EMAIL: string =
-  import.meta.env.VITE_LEAD_EMAIL || 'contact@bytezeroinc.com'
+/**
+ * Who should receive each lead. Sent along in the payload so the relay knows
+ * where to fan the notification out, and used for the mailto fallback.
+ * Override with a comma-separated VITE_LEAD_RECIPIENTS.
+ */
+export const LEAD_RECIPIENTS: string[] = (
+  import.meta.env.VITE_LEAD_RECIPIENTS ||
+  'hello@californialawfirmseo.com,contact@bytezeroinc.com'
+)
+  .split(',')
+  .map((address: string) => address.trim())
+  .filter(Boolean)
 
 export const PRACTICE_OPTIONS = [
   { value: 'pi', label: 'Personal Injury' },
@@ -79,6 +88,10 @@ function attribution() {
 
 /* ── Mailto fallback ─────────────────────────────────────── */
 
+export function leadSubject(lead: LeadPayload): string {
+  return lead.firm ? `Strategy call request — ${lead.firm}` : 'Strategy call request'
+}
+
 export function mailtoFallback(lead: LeadPayload): string {
   const body = [
     `Name: ${lead.name}`,
@@ -91,11 +104,10 @@ export function mailtoFallback(lead: LeadPayload): string {
     .filter(Boolean)
     .join('\n')
 
-  const subject = lead.firm
-    ? `Strategy call request — ${lead.firm}`
-    : 'Strategy call request'
+  // RFC 6068 allows a comma-separated recipient list in the mailto target.
+  const to = LEAD_RECIPIENTS.join(',')
 
-  return `mailto:${LEAD_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+  return `mailto:${to}?subject=${encodeURIComponent(leadSubject(lead))}&body=${encodeURIComponent(body)}`
 }
 
 /* ── Submission ──────────────────────────────────────────── */
@@ -131,6 +143,9 @@ export async function submitLead(lead: LeadPayload, source: LeadSource): Promise
         firm: lead.firm.trim(),
         practice: practiceLabel(lead.practice),
         message: lead.message.trim(),
+        subject: leadSubject(lead),
+        // Relay fans the notification out to these inboxes.
+        recipients: LEAD_RECIPIENTS,
         source,
         site: 'ca-lawfirm-seo',
         submitted_at: new Date().toISOString(),
