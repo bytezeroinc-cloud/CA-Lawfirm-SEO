@@ -1,8 +1,16 @@
 # Quo Missed-Call → Email Follow-up Automation
 
 **Client:** Charleston Shark Teeth (LCC Excursions) — lead-facing email: `lccexcursions@gmail.com`
-**Status:** LIVE as of 2026-08-09 (rebranded to client identity 2026-08-10)
-**Routine:** `trig_01FBvUQaTbeprq7B8tbtjs8W` — hourly at :27 UTC, bound to Claude session `session_01WXtbXTnDjMmuCxijm6KFsb`
+**Status:** ⏸ **PAUSED 2026-08-10** — built and fully configured, but Quo's API is refusing all calls (see below). Resume with one command once Quo restores access.
+**Routine:** `trig_01FBvUQaTbeprq7B8tbtjs8W` — hourly at :27 UTC (currently disabled), bound to Claude session `session_01WXtbXTnDjMmuCxijm6KFsb`
+
+### Paused — why, and how to resume
+
+Quo returns `API key required or invalid` for **every** call, including `list-inboxes`, which takes no parameters. It worked on 2026-08-09 (~6:05 PM ET `list-inboxes` returned the inbox; ~6:15 PM `fetch-missed-calls` returned cleanly), then from 2026-08-10 ~8:53 AM ET every call has been refused. OAuth connects fine each time — only data calls are rejected — and reconnecting the connector plus generating a new Quo API key changed nothing. Quo support escalated this on 2026-08-10 as an account-level API access issue.
+
+Note the connector is **OAuth-only**: its setup never prompts for an API key, and no Quo tool accepts one as a parameter. A key stored in `.env`, Drive, or anywhere else therefore cannot reach Quo — only Quo restoring workspace API access (or allowlisting `api.quo.com` for a direct-API rewrite) will unblock it.
+
+**To resume when Quo confirms access is restored:** re-enable the routine (claude.ai → Routines UI, or `update_trigger` with `enabled: true` and drop the `[PAUSED …]` name prefix). Everything else — branding, booking links, dedup, tasks — is already configured and needs no changes.
 **Quo line:** (843) 402-8355 — inbox `+18434028355` ("Charleston Shark Teeth", the workspace's only inbox)
 
 ## What it does
