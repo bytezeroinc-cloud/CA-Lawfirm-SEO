@@ -12,11 +12,29 @@ Every hour, Claude:
 1. Pulls **missed inbound calls** (status `missed` / `no-answer` / `abandoned`) from the last 26 hours via the Quo MCP (`fetch-missed-calls`), including any voicemail transcript.
 2. Matches each caller's number against **Quo contacts** to find their email address.
 3. **Dedupes** — max one follow-up email per lead per 7 days (checked by searching Gmail for an existing draft/sent follow-up to that address).
-4. Writes a personalized, **client-branded** follow-up email (subject "Sorry we missed your call — Charleston Shark Teeth", signed by the Charleston Shark Teeth team, no agency branding) and saves it as a **Gmail draft**.
+4. Writes a personalized, **client-branded** follow-up email (subject "Sorry we missed your call — Charleston Shark Teeth", signed by the Charleston Shark Teeth team, no agency branding) **including a topic-matched booking link** (see Booking workflow below) and saves it as a **Gmail draft**.
 5. Creates a **Quo task on the call** ("Send follow-up email draft to …") so the team sees it next to the call itself. Callers with no email on file get a "call back" task instead — no guessing of addresses.
 6. Sends a **push notification** when drafts are waiting; quiet runs stay silent.
 
 First successful run: lookback extends to **2026-08-02** to catch the week's test call, plus a one-time diagnostic (`fetch-call-transcripts`) listing *all* call activity since Aug 2 — the test call did **not** register as a missed call, so the diagnostic shows what it logged as.
+
+## Booking workflow (Rezdy)
+
+**Phase 1 — LIVE (2026-08-10):** every follow-up email carries ONE booking link to the client's live site, chosen by voicemail topic (unclear → homepage). The site's own checkout charges via RezdyPay and **the booking lands in Rezdy automatically** — no Rezdy API key is needed by Claude for this (the key lives server-side in the site's Cloudflare deployment, exactly where it should).
+
+| Topic | Link |
+|---|---|
+| default / unclear | https://charlestonsharkteethhunting.com |
+| shark tooth hunt | /shark-tooth-hunt |
+| fossil hunt | /fossil-hunt |
+| sunset cruise (shared / private) | /sunset · /sunset-private |
+| dolphin tour | /dolphin-watching |
+| bachelorette / party cruise | /bachelorette-party-cruise |
+| kids fishing camp | /kids-fishing-camp |
+
+Rezdy product reference (from the LCCX repo): shark tooth shared `PQGU8H`, sunset private `PFLDUF`, dolphin private `PX8TNQ`, crab bank shared `PGRNQU`, private shark tooth `PBU4S4`/`PZZRAJ` — full pricing structure in `REZDY-SETUP-SPEC.md` in the `bytezeroinc-cloud/LCCX` repo.
+
+**Phase 2 — optional, NOT built:** Claude polls Rezdy bookings hourly, matches them to missed-call leads (phone/email), auto-closes the Quo task and stops follow-ups for booked leads. Needs two claude.ai environment settings: `REZDY_API_KEY` as an environment variable, and `api.rezdy.com` on the environment's network allowlist (currently blocked). Payment always stays customer-side — Phase 2 only reads confirmations.
 
 ## Why drafts instead of auto-send
 
